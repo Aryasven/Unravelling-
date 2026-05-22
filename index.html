@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Web App Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        .font-mono-app { font-family: 'Share Tech Mono', monospace; }
+        .neon-glow { text-shadow: 0 0 10px rgba(34, 211, 238, 0.8), 0 0 20px rgba(34, 211, 238, 0.4); }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between p-4 font-mono-app">
+
+    <!-- Header Section -->
+    <header class="text-center py-6 border-b border-slate-800">
+        <h1 class="text-2xl tracking-widest text-cyan-400 neon-glow uppercase">System Deployment Live</h1>
+        <p class="text-xs text-slate-500 mt-1">Mobile-to-GitHub Pipeline Test</p>
+    </header>
+
+    <!-- Main Content App -->
+    <main class="flex-grow flex flex-col items-center justify-center max-w-md w-full mx-auto my-6 space-y-6">
+        
+        <!-- Live Clock Component -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 w-full text-center shadow-xl">
+            <div id="clock" class="text-5xl text-cyan-400 neon-glow tracking-wider">00:00:00</div>
+            <div id="date" class="text-xs text-slate-400 mt-2 tracking-widest uppercase">Loading Matrix...</div>
+        </div>
+
+        <!-- Interactive Task Component -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 w-full shadow-xl flex flex-col h-72">
+            <h2 class="text-sm uppercase tracking-wider text-slate-400 mb-3 border-b border-slate-800 pb-2">Quick Micro-Tasks</h2>
+            
+            <!-- Input Row -->
+            <div class="flex gap-2 mb-4">
+                <input type="text" id="taskInput" placeholder="Enter test prompt..." class="bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 flex-grow">
+                <button onclick="addTask()" class="bg-cyan-500 hover:bg-cyan-600 text-slate-950 px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wider transition-colors">Add</button>
+            </div>
+
+            <!-- Scrollable List -->
+            <div class="overflow-y-auto flex-grow pr-1">
+                <ul id="taskList" class="space-y-2">
+                    <!-- Tasks injected here -->
+                </ul>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Status -->
+    <footer class="text-center py-4 border-t border-slate-800 text-[10px] text-slate-600 tracking-wider">
+        STATUS: ONLINE // LOCALSTORAGE ENABLED
+    </footer>
+
+    <!-- Application Logic -->
+    <script>
+        // 1. Live Clock Logic
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            const dateString = now.toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+            
+            document.getElementById('clock').textContent = timeString;
+            document.getElementById('date').textContent = dateString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // 2. Persistent Task Logic (Stored on your phone's browser local memory)
+        let tasks = JSON.parse(localStorage.getItem('mobile_tasks')) || [
+            { text: "Create GitHub repository on phone", done: true },
+            { text: "Paste this index.html code", done: false },
+            { text: "Turn on GitHub Pages settings", done: false }
+        ];
+
+        function renderTasks() {
+            const list = document.getElementById('taskList');
+            list.innerHTML = '';
+            
+            tasks.forEach((task, index) => {
+                const li = document.createElement('li');
+                li.className = `flex justify-between items-center p-2.5 rounded-lg border text-sm transition-all ${task.done ? 'bg-slate-950/40 border-slate-900/60 text-slate-500 line-through' : 'bg-slate-950 border-slate-800 text-slate-300'}`;
+                
+                li.innerHTML = `
+                    <span class="truncate pr-2 cursor-pointer flex-grow" onclick="toggleTask(${index})">${task.text}</span>
+                    <button onclick="deleteTask(${index})" class="text-slate-600 hover:text-rose-400 font-bold px-1 text-xs">✕</button>
+                `;
+                list.appendChild(li);
+            });
+            localStorage.setItem('mobile_tasks', JSON.stringify(tasks));
+        }
+
+        function addTask() {
+            const input = document.getElementById('taskInput');
+            if (input.value.trim() === '') return;
+            tasks.push({ text: input.value.trim(), done: false });
+            input.value = '';
+            renderTasks();
+        }
+
+        function toggleTask(index) {
+            tasks[index].done = !tasks[index].done;
+            renderTasks();
+        }
+
+        function deleteTask(index) {
+            tasks.splice(index, 1);
+            renderTasks();
+        }
+
+        // Initialize view
+        renderTasks();
+    </script>
+</body>
+</html>
