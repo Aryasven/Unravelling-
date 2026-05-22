@@ -3,114 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Web App Test</title>
+    <title>Advaita Vicara: Drig Drisya Viveka</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-        .font-mono-app { font-family: 'Share Tech Mono', monospace; }
-        .neon-glow { text-shadow: 0 0 10px rgba(34, 211, 238, 0.8), 0 0 20px rgba(34, 211, 238, 0.4); }
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Quicksand:wght@400;500&display=swap');
+        .font-serif-vedic { font-family: 'Cinzel', serif; }
+        .font-sans-vedic { font-family: 'Quicksand', sans-serif; }
+        
+        .fade-active { opacity: 1; transform: translateY(0); transition: all 0.5s ease-out; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #b45309; border-radius: 2px; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between p-4 font-mono-app">
+<body class="bg-slate-950 text-amber-50 min-h-screen flex flex-col justify-between font-sans-vedic overflow-x-hidden">
 
-    <!-- Header Section -->
-    <header class="text-center py-6 border-b border-slate-800">
-        <h1 class="text-2xl tracking-widest text-cyan-400 neon-glow uppercase">System Deployment Live</h1>
-        <p class="text-xs text-slate-500 mt-1">Mobile-to-GitHub Pipeline Test</p>
+    <!-- NAVIGATION TRACKER -->
+    <header class="bg-slate-900/60 backdrop-blur-md border-b border-amber-900/30 sticky top-0 z-50 px-4 py-3">
+        <div class="max-w-md mx-auto flex items-center justify-between">
+            <span class="text-xs tracking-widest text-amber-500 uppercase font-serif-vedic font-bold">Inquiry Path</span>
+            <div id="sub-map" class="flex items-center space-x-1.5 text-[9px] tracking-tight">
+                <span id="step-0" class="text-amber-500 font-bold border-b border-amber-500">1. WORLD</span>
+                <span class="text-slate-600">➔</span>
+                <span id="step-1" class="text-slate-500">2. BODY</span>
+                <span class="text-slate-600">➔</span>
+                <span id="step-2" class="text-slate-500">3. MIND</span>
+                <span class="text-slate-600">➔</span>
+                <span id="step-3" class="text-slate-500">4. SELF</span>
+            </div>
+        </div>
     </header>
 
-    <!-- Main Content App -->
-    <main class="flex-grow flex flex-col items-center justify-center max-w-md w-full mx-auto my-6 space-y-6">
-        
-        <!-- Live Clock Component -->
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 w-full text-center shadow-xl">
-            <div id="clock" class="text-5xl text-cyan-400 neon-glow tracking-wider">00:00:00</div>
-            <div id="date" class="text-xs text-slate-400 mt-2 tracking-widest uppercase">Loading Matrix...</div>
-        </div>
+    <!-- CORE INTERACTIVE VIEWPORT -->
+    <main class="flex-grow flex flex-col items-center justify-center px-4 py-4 max-w-md w-full mx-auto relative">
+        <div id="ambient-glow" class="absolute w-64 h-64 bg-amber-500/5 rounded-full blur-3xl pointer-events-none transition-all duration-1000"></div>
 
-        <!-- Interactive Task Component -->
-        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 w-full shadow-xl flex flex-col h-72">
-            <h2 class="text-sm uppercase tracking-wider text-slate-400 mb-3 border-b border-slate-800 pb-2">Quick Micro-Tasks</h2>
+        <!-- Dynamic Game Card -->
+        <div id="game-card" class="w-full bg-slate-900/30 border border-amber-900/20 rounded-2xl p-5 backdrop-blur-sm shadow-2xl relative z-10 fade-active">
             
-            <!-- Input Row -->
-            <div class="flex gap-2 mb-4">
-                <input type="text" id="taskInput" placeholder="Enter test prompt..." class="bg-slate-950 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 flex-grow">
-                <button onclick="addTask()" class="bg-cyan-500 hover:bg-cyan-600 text-slate-950 px-4 py-2 rounded-lg text-sm font-bold uppercase tracking-wider transition-colors">Add</button>
+            <!-- Context Header -->
+            <div id="chapter-tag" class="text-[9px] uppercase tracking-widest text-amber-600 font-serif-vedic mb-2">
+                Drig Drisya Viveka // Stage I
             </div>
 
-            <!-- Scrollable List -->
-            <div class="overflow-y-auto flex-grow pr-1">
-                <ul id="taskList" class="space-y-2">
-                    <!-- Tasks injected here -->
-                </ul>
+            <!-- VISUAL CONTAINER -->
+            <div class="w-full rounded-xl overflow-hidden border border-amber-900/10 mb-4 bg-slate-950/60 flex items-center justify-center relative group">
+                <div id="visual-art" class="w-full h-36 bg-gradient-to-b from-amber-950/20 to-slate-950 flex flex-col items-center justify-center p-4 text-center transition-all duration-700">
+                    <!-- Cosmic Third Eye Graphic via SVG for zero dependencies -->
+                    <svg id="visual-icon" class="w-10 h-10 text-amber-600/70 mb-2 transition-transform duration-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <span id="visual-caption" class="text-[10px] tracking-widest text-slate-500 font-serif-vedic uppercase">The Exterior Cosmos</span>
+                </div>
             </div>
+            
+            <!-- Metaphor Window -->
+            <div id="scenario-text" class="text-sm text-amber-100/90 leading-relaxed font-serif-vedic mb-4 border-l border-amber-700/40 pl-3 py-0.5">
+                Look closely at the space around you. Colors, textures, shapes, and the device in your hand. The forms are many, constantly moving and shifting, but your sight remains singular and steady. The world is an object observed by your physical senses.
+            </div>
+
+            <!-- Question Input Gate -->
+            <div class="bg-slate-950/70 border border-amber-900/10 rounded-xl p-3.5 mb-4">
+                <p class="text-[10px] text-amber-500/60 font-serif-vedic uppercase tracking-wider mb-1">Contemplation Gate:</p>
+                <p id="inquiry-question" class="text-xs text-slate-300 leading-relaxed font-medium">
+                    Since a camera cannot photograph itself, and an object cannot see itself, can you be identical to the external world you are currently tracking? What separates your sight from the things you see?
+                </p>
+            </div>
+
+            <!-- Response Prompt -->
+            <div class="space-y-3">
+                <textarea id="player-reflection" rows="2" placeholder="Observe your surroundings and type your response..." class="w-full bg-slate-950 border border-amber-950/60 rounded-xl px-3 py-2 text-xs text-amber-100 placeholder:text-slate-600 focus:outline-none focus:border-amber-600 transition-colors resize-none leading-relaxed"></textarea>
+                
+                <button onclick="submitReflection()" class="w-full bg-gradient-to-r from-amber-800 to-amber-700 hover:from-amber-700 hover:to-amber-600 text-slate-950 font-bold uppercase tracking-widest text-[10px] py-3 rounded-xl shadow-lg transition-all active:scale-[0.99]">
+                    Analyze Witness Layer
+                </button>
+            </div>
+
         </div>
-
     </main>
 
-    <!-- Footer Status -->
-    <footer class="text-center py-4 border-t border-slate-800 text-[10px] text-slate-600 tracking-wider">
-        STATUS: ONLINE // LOCALSTORAGE ENABLED
+    <!-- MEMORY JOURNAL SYSTEM -->
+    <footer class="bg-slate-950 border-t border-amber-900/10 py-2.5 px-4">
+        <div class="max-w-md mx-auto flex items-center justify-between">
+            <button onclick="toggleJournal()" class="text-[9px] uppercase tracking-wider text-slate-500 hover:text-amber-500 transition-colors font-serif-vedic">
+                📜 Insight Log (<span id="journal-count">0</span>)
+            </button>
+            <div id="game-status" class="text-[9px] text-amber-700 font-bold tracking-widest uppercase">
+                Vicara: Bahya (External)
+            </div>
+        </div>
+        <div id="journal-drawer" class="hidden max-w-md mx-auto mt-3 max-h-36 overflow-y-auto space-y-2 pt-2 border-t border-slate-900"></div>
     </footer>
 
-    <!-- Application Logic -->
+    <!-- LOGIC MANAGEMENT -->
     <script>
-        // 1. Live Clock Logic
-        function updateClock() {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString();
-            const dateString = now.toLocaleDateString(undefined, { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
-            
-            document.getElementById('clock').textContent = timeString;
-            document.getElementById('date').textContent = dateString;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // 2. Persistent Task Logic (Stored on your phone's browser local memory)
-        let tasks = JSON.parse(localStorage.getItem('mobile_tasks')) || [
-            { text: "Create GitHub repository on phone", done: true },
-            { text: "Paste this index.html code", done: false },
-            { text: "Turn on GitHub Pages settings", done: false }
+        const layers = [
+            {
+                tag: "Drig Drisya Viveka // Stage I: Form & Sight",
+                scenario: "Look closely at the space around you—colors, shapes, and the very device in your hands. These forms change, move, and alter constantly, but your sight remains steady. The world is an object observed by your physical body.",
+                question: "Since an object cannot see itself, you must be distinct from the universe you perceive. Look at an item near you. What separates your awareness from that object?",
+                status: "Vicara: Bahya (External)",
+                glow: "rgba(245, 158, 11, 0.03)",
+                caption: "The Exterior Cosmos",
+                svg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />`
+            },
+            {
+                tag: "Drig Drisya Viveka // Stage II: Sight & Mind",
+                scenario: "Now, gently shift your attention from the world to the physical sensory apparatus. Close your eyes for a moment. You can feel your heartbeat, the temperature of your skin, and the physical location of your eyes. The body and its senses are now objects known to something deeper.",
+                question: "If your eyes, ears, and sensations can be felt, measured, and tracked, they are objects of observation. If your body is the object, what is the interior subject that knows it?",
+                status: "Vicara: Abhyantara (Internal Body)",
+                glow: "rgba(16, 185, 129, 0.03)",
+                caption: "The Sensorium",
+                svg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />`
+            },
+            {
+                tag: "Drig Drisya Viveka // Stage III: Mind & Witness",
+                scenario: "We arrive inside the mind itself. Watch your thoughts come and go. A memory surface, an opinion manifests, an emotion swells and then decays. The mind is a turbulent, shifting stream of properties, modifications, and concepts.",
+                question: "You can track your thoughts changing, arriving, and vanishing. Since your mind is observed, it cannot be the ultimate Observer. If your mind is an object, who or what is watching your mind?",
+                status: "Vicara: Antahkarana (The Mind)",
+                glow: "rgba(139, 92, 246, 0.04)",
+                caption: "The Thought Stream",
+                svg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />`
+            },
+            {
+                tag: "Drig Drisya Viveka // Stage IV: The Changeless Self",
+                scenario: "The grand discrimination dissolves the illusion. The world is an object to the body; the body is an object to the mind; the mind is an object to the absolute Witness (Sakshi). You are that Witness—infinite, unbothered, changeless light.",
+                question: "The mind feels joy, then sadness. The body grows young, then old. But the consciousness observing them never changes its nature. Describe what it feels like to rest as this detached, eternal space instead of the frantic mind.",
+                status: "Vicara: Sakshi Atman (The Self)",
+                glow: "rgba(236, 72, 153, 0.05)",
+                caption: "The Infinite Witness",
+                svg: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M16.243 17.657l.707.707M6.343 6.343l.707-.707M14 12a2 2 0 11-4 0 2 2 0 014 0z" />`
+            }
         ];
 
-        function renderTasks() {
-            const list = document.getElementById('taskList');
-            list.innerHTML = '';
+        let currentLayer = 0;
+        let logs = JSON.parse(localStorage.getItem('drig_drisya_logs')) || [];
+
+        function updateDisplay() {
+            if (currentLayer >= layers.length) {
+                renderRealization();
+                return;
+            }
+
+            const data = layers[currentLayer];
+            const card = document.getElementById('game-card');
             
-            tasks.forEach((task, index) => {
-                const li = document.createElement('li');
-                li.className = `flex justify-between items-center p-2.5 rounded-lg border text-sm transition-all ${task.done ? 'bg-slate-950/40 border-slate-900/60 text-slate-500 line-through' : 'bg-slate-950 border-slate-800 text-slate-300'}`;
+            card.style.opacity = 0;
+            card.style.transform = "translateY(5px)";
+            
+            setTimeout(() => {
+                document.getElementById('chapter-tag').textContent = data.tag;
+                document.getElementById('scenario-text').textContent = data.scenario;
+                document.getElementById('inquiry-question').textContent = data.question;
+                document.getElementById('game-status').textContent = data.status;
+                document.getElementById('ambient-glow').style.backgroundColor = data.glow;
+                document.getElementById('visual-caption').textContent = data.caption;
+                document.getElementById('visual-icon').innerHTML = data.svg;
+                document.getElementById('player-reflection').value = '';
                 
-                li.innerHTML = `
-                    <span class="truncate pr-2 cursor-pointer flex-grow" onclick="toggleTask(${index})">${task.text}</span>
-                    <button onclick="deleteTask(${index})" class="text-slate-600 hover:text-rose-400 font-bold px-1 text-xs">✕</button>
+                // Keep progress dots current
+                for (let i = 0; i < layers.length; i++) {
+                    const el = document.getElementById(`step-${i}`);
+                    if (i === currentLayer) {
+                        el.className = "text-amber-500 font-bold border-b border-amber-500 pb-0.5";
+                    } else if (i < currentLayer) {
+                        el.className = "text-emerald-500 line-through opacity-50";
+                    } else {
+                        el.className = "text-slate-600";
+                    }
+                }
+
+                card.style.opacity = 1;
+                card.style.transform = "translateY(0)";
+            }, 250);
+
+            document.getElementById('journal-count').textContent = logs.length;
+        }
+
+        function submitReflection() {
+            const val = document.getElementById('player-reflection').value.trim();
+            if (!val) {
+                alert("Do not pass over the inquiry superficially. Direct your focus inward and write your observation.");
+                return;
+            }
+
+            logs.push({ stage: layers[currentLayer].tag, entry: val });
+            localStorage.setItem('drig_drisya_logs', JSON.stringify(logs));
+
+            currentLayer++;
+            updateDisplay();
+            renderLogs();
+        }
+
+        function renderLogs() {
+            const drawer = document.getElementById('journal-drawer');
+            drawer.innerHTML = '';
+            logs.forEach(l => {
+                const item = document.createElement('div');
+                item.className = "bg-slate-950 border border-amber-900/10 rounded-xl p-2.5 text-[11px]";
+                item.innerHTML = `
+                    <div class="text-amber-600 font-serif-vedic mb-0.5">${l.stage}</div>
+                    <div class="text-slate-400 italic">"${l.entry}"</div>
                 `;
-                list.appendChild(li);
+                drawer.prepend(item);
             });
-            localStorage.setItem('mobile_tasks', JSON.stringify(tasks));
+            document.getElementById('journal-count').textContent = logs.length;
         }
 
-        function addTask() {
-            const input = document.getElementById('taskInput');
-            if (input.value.trim() === '') return;
-            tasks.push({ text: input.value.trim(), done: false });
-            input.value = '';
-            renderTasks();
+        function toggleJournal() {
+            document.getElementById('journal-drawer').classList.toggle('hidden');
         }
 
-        function toggleTask(index) {
-            tasks[index].done = !tasks[index].done;
-            renderTasks();
+        function renderRealization() {
+            document.getElementById('game-card').innerHTML = `
+                <div class="text-center py-4">
+                    <h2 class="text-xl font-serif-vedic text-amber-500 tracking-widest uppercase mb-3">The Mind Isolated</h2>
+                    <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                        By ascending through these steps, the foundational distinction is complete: You have proven to your own awareness that the world, the body, and the mind are all mere objects passing in front of you. You are the immutable Drig—the Self.
+                    </p>
+                    <div class="border border-amber-900/20 rounded-xl bg-slate-950/40 p-3 text-left max-h-40 overflow-y-auto space-y-3 mb-4">
+                        <span class="text-[9px] tracking-widest text-amber-600 font-serif-vedic block border-b border-slate-900 pb-0.5">VIVID REALISATIONS ARCHIVE:</span>
+                        ${logs.map(l => `<div class="text-[11px]"><p class="text-amber-700 font-serif-vedic">${l.stage}</p><p class="text-slate-400">"${l.entry}"</p></div>`).join('')}
+                    </div>
+                    <button onclick="nextUpanishadChapter()" class="w-full bg-gradient-to-r from-amber-700 to-amber-600 text-slate-950 font-bold uppercase tracking-widest text-[10px] py-3 rounded-xl transition-all">
+                        Advance to Mandukya (The 3 States)
+                    </button>
+                </div>
+            `;
+            document.getElementById('game-status').textContent = "SEER IS ISOLATED";
         }
 
-        function deleteTask(index) {
-            tasks.splice(index, 1);
-            renderTasks();
+        function nextUpanishadChapter() {
+            alert("Perfect. Next, we will code the Mandukya Upanishad state framework into this engine.");
         }
 
-        // Initialize view
-        renderTasks();
+        updateDisplay();
+        renderLogs();
     </script>
 </body>
 </html>
